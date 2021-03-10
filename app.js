@@ -7,9 +7,17 @@
 //     displaySongs(data.data);
 // }
 
+document.getElementById('search-field').addEventListener("keypress",function(event){
+    if(event.key == 'Enter'){
+        document.getElementById('song-lyrics').style.display="none";
+        document.getElementById('sarch-button').click();
+    }
+});
 const searchSongs = () => {
+    document.getElementById('song-lyrics').style.display="none";
     const searchText = document.getElementById('search-field').value;
     const url = `https://api.lyrics.ovh/suggest/${searchText}`
+    toggoleSpinner(); 
     // load data
     fetch(url)
         .then(res => res.json())
@@ -37,6 +45,7 @@ const displaySongs = songs => {
         </div>
         `;
         songContainer.appendChild(songDiv);
+        toggoleSpinner();
     })
 }
 
@@ -48,7 +57,8 @@ const getLyric = async (artist, title) => {
         displayLyrics(data.lyrics);
     }
     catch (error) {
-        displayError('Sorry! I failed to load lyrics, Please try again later!!!')
+        const errorTag = document.getElementById('error-message');
+        errorTag.innerText = error;
     }
 }
 
@@ -63,9 +73,15 @@ const getLyric = async (artist, title) => {
 const displayLyrics = lyrics => {
     const lyricsDiv = document.getElementById('song-lyrics');
     lyricsDiv.innerText = lyrics;
+    document.getElementById('song-lyrics').style.display="block";
 }
 
 const displayError = error => {
     const errorTag = document.getElementById('error-message');
     errorTag.innerText = error;
+}
+
+const toggoleSpinner = () => {
+    const spinner = document.getElementById('spinner');
+    spinner.classList.toggle('d-none');
 }

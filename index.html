@@ -47,9 +47,19 @@
                 <h1 class="text-center">Hard Rock Lyric Search</h1>
                 <div class="search-box my-5">
                     <input id="search-field" type="text" class="form-control" placeholder="Enter your artist song name">
-                    <button onclick="searchSongs()" class="btn btn-success search-btn">Search</button>
+                    <button id="sarch-button" onclick="searchSongs()" class="btn btn-success search-btn">Search</button>
                 </div>
             </div>
+            
+            <!-- Spinner -->
+            <div id="spinner" class="d-none"> 
+                <div class="d-flex justify-content-center">
+                    <div class="spinner-border text-info d-flex justify-content-center">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            </div>
+
             <!-- Single Lyrics -->
             <h3 id="error-message" class="text-danger"></h3>
             <div id="song-lyrics" class="single-lyrics text-center">
